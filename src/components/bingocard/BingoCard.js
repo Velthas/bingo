@@ -22,7 +22,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo }) => {
 
   const checkForBingo = (index) => {
     validateBingos(hit);
-    
+
     const isVerticalBingo = checkVerticalBingo(index, hit);
     const isHorizontalBingo = checkHorizontalBingo(index, hit);
     const isDiagonalBingo = checkDiagonalBingo(index, hit);
@@ -63,8 +63,9 @@ const BingoCard = ({ setBingo, validateBingos, bingo }) => {
 const BingoGrid = styled.div`
   display: grid;
   grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr;
-  height: 700px;
-  width: 700px;
+  max-height: 700px;
+  max-width: 700px;
+  width: 80%;
 `;
 
 export default BingoCard;
