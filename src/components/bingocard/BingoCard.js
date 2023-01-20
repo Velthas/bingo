@@ -53,6 +53,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo }) => {
             hit={hit}
             content={item}
             toggleTile={toggleTile}
+            bingo={bingo}
           />
         );
       })}
@@ -67,5 +68,7 @@ const BingoGrid = styled.div`
   max-width: 700px;
   width: 80%;
 `;
+
+
 
 export default BingoCard;
