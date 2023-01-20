@@ -4,8 +4,7 @@ const convertToCoord = (index) => {
   return [x, y];
 };
 
-const convertToTile = (x, y) =>  (5 * x) + y;
-
+const convertToTile = (x, y) => 5 * x + y;
 
 const checkVerticalBingo = (hitIndex, hits) => {
   let counter = 0;
@@ -28,8 +27,10 @@ const checkHorizontalBingo = (hitIndex, hits) => {
   const [x, y] = convertToCoord(hitIndex);
   for (let i = 0; i < 5; i++) {
     const index = convertToTile(x, i);
-    if (hits.indexOf(index) !== -1) counter += 1;
-    else break;
+    if (hits.indexOf(index) !== -1) {
+      counter += 1;
+      bingo.push(index);
+    } else break;
   }
   if (counter === 5) return { result: true, bingo };
   else return { result: false };

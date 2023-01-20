@@ -12,7 +12,7 @@ import {
   checkDiagonalBingo,
 } from "../../utils/verifyBingo";
 
-const BingoCard = () => {
+const BingoCard = ({ setBingo, validateBingos, bingo }) => {
   const [cards, setCards] = useState(shuffleArray(material));
   const [hit, setHit] = useState([12]); // Always start with 12 as hit;
   const [last, setLast] = useState(null);
@@ -21,13 +21,18 @@ const BingoCard = () => {
   }, [hit]);
 
   const checkForBingo = (index) => {
-    const isVerticalBingo = checkVerticalBingo(index, hit)
-    const isHorizontalBingo = checkHorizontalBingo(index, hit)
-    const isDiagonalBingo = checkDiagonalBingo(index, hit)
+    validateBingos(hit);
     
-    if(isVerticalBingo.result) console.log('It\'s a vertical Bingo!')
-    if(isHorizontalBingo.result) console.log('It\'s a horizontal Bingo!')
-    if(isDiagonalBingo.result) console.log('It\'s a diagonal Bingo!')
+    const isVerticalBingo = checkVerticalBingo(index, hit);
+    const isHorizontalBingo = checkHorizontalBingo(index, hit);
+    const isDiagonalBingo = checkDiagonalBingo(index, hit);
+
+    if (isVerticalBingo.result)
+      setBingo((prevState) => [...prevState, isVerticalBingo.bingo]);
+    if (isHorizontalBingo.result)
+      setBingo((prevState) => [...prevState, isHorizontalBingo.bingo]);
+    if (isDiagonalBingo.result)
+      setBingo((prevState) => [...prevState, isDiagonalBingo.bingo]);
   };
 
   const toggleTile = (index) => {
