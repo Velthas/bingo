@@ -8,13 +8,30 @@ import material from "../../utils/cardContent";
 import BingoTile from "./BingoTile";
 import FreeTile from "./FreeTile";
 
-const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
+const BingoCard = ({ playCheer }) => {
+  const [bingo, setBingo] = useState([]); // Multi-dimensional array, each array contains bingo hits;
   const [cards, setCards] = useState(shuffleArray(material)); // Shuffle cards on page load
   const [hit, setHit] = useState([12]); // Always start with 12 (free tile) as hit;
   const [last, setLast] = useState(null); // Use this to keep track of last added/removed tile
   useEffect(() => {
     checkForBingo(last); // On hit array change, we check the bingo based on last unhit/hit tile.
   }, [hit]);
+
+  // Use this function to ensure all bingos are up to date
+  // If any of the tiles listed are not hit, remove the bingo from the list.
+  const validateBingos = () => {
+    if (bingo.length < 0) return;
+    const updatedArray = bingo.filter((combination) => {
+      let counter = 0;
+      let allTilesHit = false;
+      for (let i = 0; i < combination.length; i++) {
+        if (hit.indexOf(combination[i]) !== -1) counter++;
+        if (counter === 5) allTilesHit = true;
+      }
+      return allTilesHit;
+    });
+    setBingo(updatedArray);
+  };
 
   // This function is used after every hit to check for bingos.
   const checkForBingo = (index) => {

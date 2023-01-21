@@ -5,29 +5,12 @@ import BingoCard from "./components/bingocard/BingoCard";
 import BingoNotification from "./components/BingoNotification";
 
 function App() {
-  const [bingo, setBingo] = useState([]); // Multi-dimensional array, each array contains bingo hits;
   const [cheer, setCheer] = useState(false); // Used to temporarily display 'cheer' notification
 
   // This function will display the 'Bingo' notification for 3s.
   const playCheer = () => {
     setCheer(true);
     setTimeout(() => setCheer(false), 3000);
-  };
-
-  // Use this function to ensure all bingos are up to date
-  // If any of the tiles listed are not hit, remove the bingo from the list.
-  const validateBingos = (hits) => {
-    if (bingo.length < 0) return;
-    const updatedArray = bingo.filter((combination) => {
-      let counter = 0;
-      let allTilesHit = false;
-      for (let i = 0; i < combination.length; i++) {
-        if (hits.indexOf(combination[i]) !== -1) counter++;
-        if (counter === 5) allTilesHit = true;
-      }
-      return allTilesHit;
-    });
-    setBingo(updatedArray);
   };
 
   return (
@@ -39,12 +22,7 @@ function App() {
         rush head down into another work call. Line up 5 of these bizarre
         occurrences to get a Bingo!
       </Intro>
-      <BingoCard
-        playCheer={playCheer}
-        validateBingos={validateBingos}
-        bingo={bingo}
-        setBingo={setBingo}
-      />
+      <BingoCard playCheer={playCheer} />
     </Wrapper>
   );
 }
@@ -92,7 +70,7 @@ const Intro = styled.p`
   width: 60%;
 
   @media (max-width: 740px) {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 8px;
     width: 80%;
   }
