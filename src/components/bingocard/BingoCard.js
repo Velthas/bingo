@@ -11,7 +11,7 @@ import FreeTile from "./FreeTile";
 const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
   const [cards, setCards] = useState(shuffleArray(material)); // Shuffle cards on page load
   const [hit, setHit] = useState([12]); // Always start with 12 (free tile) as hit;
-  const [last, setLast] = useState(null);
+  const [last, setLast] = useState(null); // Use this to keep track of last added/removed tile
   useEffect(() => {
     checkForBingo(last);
   }, [hit]);
@@ -37,6 +37,14 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
       playCheer(); // If there is any bingo, show 'bingo' notification
   };
 
+  // This button will shuffle the cards and reset the bingo array
+  const resetCard = () => {
+    setBingo([]); // Reset all the bingos the user may have achieved
+    setCards(shuffleArray(material)); // This shuffles the cards
+    setLast(null); // There should be no last clicked item in a fresh game
+    setHit([12]); // Always remember to keep the free tile as clicked
+  }
+
   // This either plays or unplays a tile
   const toggleTile = (index) => {
     const isAlreadyClicked = hit.indexOf(index) !== -1;
@@ -46,6 +54,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
   };
 
   return (
+  <>
     <BingoGrid>
       {cards.map((item, index) => {
         if (index === 12) return <FreeTile key={uniqid()} />;
@@ -61,6 +70,8 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
         );
       })}
     </BingoGrid>
+    <Button onClick={() => resetCard()}>Reset</Button>
+  </>
   );
 };
 
@@ -70,5 +81,27 @@ const BingoGrid = styled.div`
   max-height: 700px;
   max-width: 700px;
 `;
+
+const Button = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  height: 50px;
+  width: 150px;
+
+  transition: 0.15s ease-out;
+  box-shadow: 0px 5px #3d7c9e;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  background-color: #06354e;
+  color: #fff;
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(5px);
+  }
+`
 
 export default BingoCard;

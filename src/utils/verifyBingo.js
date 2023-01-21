@@ -41,7 +41,7 @@ const checkHorizontalBingo = (hitIndex, hits) => {
 };
 
 // Feels like a very suboptimal implementation
-// First, we check if last hit was on right or left diagonal
+// First, I check if last hit was on right or left diagonal
 // Center is conveniently taken so non issue here
 // After that, I check for hits on the diagonal that was hit
 // If the hit wasn't on either diagonal, return false by default

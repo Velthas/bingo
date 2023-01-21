@@ -32,10 +32,6 @@ const Content = styled.span`
   font-size: 1.2rem;
 
   @media (max-width: 850px) {
-    font-size: 1rem;
-  }
-
-  @media (max-width: 850px) {
     display: none;
   } ;
 `;
@@ -44,7 +40,7 @@ const Icon = styled(MdEmojiFoodBeverage)`
   color: #fff;
   height: 60px;
   width: 60px;
-  
+
   @media (max-width: 850px) {
     height: 60px;
     width: 60px;
