@@ -25,6 +25,8 @@ As specified on the coding challenge:
  - React.js
  - Styled Components
 -  React Icons
+-  Animate.css
+-  Uniqid
 
 ### Reflections
 This was a fun project to work on, especially someone who had never tried this kind of Bingo (Tombola would still be my go-to for holidays, have to respect Italian traditions).
