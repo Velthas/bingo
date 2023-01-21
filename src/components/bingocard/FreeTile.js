@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { MdEmojiFoodBeverage } from "react-icons/md";
+import { GiDevilMask } from "react-icons/gi";
 
-const FreeTile = () => {
+const FreeTile = ({bingo}) => {
+  // Function just checks if there are 12 bingos as expected
+  // If so, causes some style changes...
+  const allBingosAchieved = () => bingo.length === 12;
+
   return (
-    <Tile>
-      <Icon />
-      <Content>Free Bingo Tile!</Content>
+    <Tile allFound={allBingosAchieved()}>
+      { !allBingosAchieved() ? <Tea /> : <Devil /> }
+      <Content>{!allBingosAchieved() ? 'Free Bingo Tile!' : 'Run for your life!'}</Content>
     </Tile>
   );
 };
@@ -20,8 +25,8 @@ const Tile = styled.div`
   padding: 8px;
   border: 1px solid black;
   font-size: 1rem;
-  color: white;
-  background-color: #06354e;
+  color: #fff;
+  background-color: ${({ allFound }) => allFound ? 'crimson' : "#06354e"};
   text-align: center;
   width: 100%;
   aspect-ratio: 1/1;
@@ -36,10 +41,15 @@ const Content = styled.span`
   } ;
 `;
 
-const Icon = styled(MdEmojiFoodBeverage)`
+const Icon = `
   color: #fff;
   height: 60px;
   width: 60px;
+  transition: 0.15s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media (max-width: 850px) {
     height: 60px;
@@ -56,5 +66,13 @@ const Icon = styled(MdEmojiFoodBeverage)`
     width: 28px;
   } ;
 `;
+
+const Tea = styled(MdEmojiFoodBeverage)`
+ ${Icon}
+`
+
+const Devil = styled(GiDevilMask)`
+ ${Icon}
+`
 
 export default FreeTile;

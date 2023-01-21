@@ -13,7 +13,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
   const [hit, setHit] = useState([12]); // Always start with 12 (free tile) as hit;
   const [last, setLast] = useState(null); // Use this to keep track of last added/removed tile
   useEffect(() => {
-    checkForBingo(last);
+    checkForBingo(last); // On hit array change, we check the bingo based on last unhit/hit tile.
   }, [hit]);
 
   // This function is used after every hit to check for bingos.
@@ -37,7 +37,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
       playCheer(); // If there is any bingo, show 'bingo' notification
   };
 
-  // This button will shuffle the cards and reset the bingo array
+  // Used to soft reset the current bingo card.
   const resetCard = () => {
     setBingo([]); // Reset all the bingos the user may have achieved
     setCards(shuffleArray(material)); // This shuffles the cards
@@ -57,7 +57,7 @@ const BingoCard = ({ setBingo, validateBingos, bingo, playCheer }) => {
   <>
     <BingoGrid>
       {cards.map((item, index) => {
-        if (index === 12) return <FreeTile key={uniqid()} />;
+        if (index === 12) return <FreeTile bingo={bingo} key={uniqid()} />;
         return (
           <BingoTile
             index={index}
