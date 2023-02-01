@@ -10,7 +10,7 @@ function App() {
   // This function will display the 'Bingo' notification for 3s.
   const playCheer = () => {
     setCheer(true);
-    setTimeout(() => setCheer(false), 3000);
+    setTimeout(() => setCheer(false), 1000);
   };
 
   return (
@@ -76,7 +76,7 @@ const Intro = styled.p`
   }
 
   @media (max-width: 500px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     width: 90%;
   } ;
 `;

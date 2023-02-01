@@ -39,4 +39,8 @@ The greatest time sink in my case was, I believe, not having spent some time dev
 
 Another offender would have to be grid: while I already grasped how it worked on a basic level, making it so the bingo grid didn't break at smaller screen sizes required some extra time and effort. 
 
+Given more time to work on the project, I believe my first objective would be cleaning up the code, especially that concerning bingo verifications. For example, these functions return an object with a result and bingo property if there is a bingo. This is, actually, unneeded, since if I just returned a bingo array that would evaluate to truthy, and false or null would evaluate to falsy. 
+
+Secondly would be cleaning up CSS by setting a theme provider using style components. This way I could not only keep better track of what colors are being used in a simple fashion, but I could also cut on some repetition by, for example, gathering flex declarations under a single variable. Since most of what you need is 'display: flex; align-items: center; justify-content: center;' for vertical and horizontal alignment, converting that to just one line each time would really add up over time. 
+
 If you've read this far, thank you very much for spending some time looking at my work. Happy coding!

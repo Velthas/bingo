@@ -1,5 +1,6 @@
 // Converts an index to X and Y of a 5x5 board
 // Not necessary per se, but useful to reason about the position of tiles
+//TODO: Just realized I inverted x and y here
 const convertToCoord = (index) => {
   const y = index < 5 ? index : index % 5;
   const x = index < 5 ? 0 : Math.trunc(index / 5);
@@ -16,12 +17,11 @@ const checkVerticalBingo = (hitIndex, hits) => {
   const [x, y] = convertToCoord(hitIndex);
   for (let i = 0; i < 5; i++) {
     const index = convertToTile(i, y);
-    if (hits.indexOf(index) !== -1) {
-      bingo.push(index);
-    } else break;
+    if (hits.includes(index)) bingo.push(index); //TODO: Includes is much more readable
+    else break;
   } // If bingo array has 5 coordinates there is a vertical bingo.
-  if (bingo.length === 5) return { result: true, bingo };
-  else return { result: false };
+  if (bingo.length === 5) return bingo; //TODO: No need to return an object here 
+  else return false; //TODO: An array is truthy, false, well, falsy
 };
 
 // Gets leftmost tile of the row last hit was in
@@ -32,12 +32,11 @@ const checkHorizontalBingo = (hitIndex, hits) => {
   const [x, y] = convertToCoord(hitIndex);
   for (let i = 0; i < 5; i++) {
     const index = convertToTile(x, i);
-    if (hits.indexOf(index) !== -1) {
-      bingo.push(index);
-    } else break;
+    if (hits.includes(index)) bingo.push(index);
+    else break;
   }
-  if (bingo.length === 5) return { result: true, bingo };
-  else return { result: false };
+  if (bingo.length === 5) return bingo
+  return false;
 };
 
 // Feels like a very suboptimal implementation
@@ -50,24 +49,24 @@ const checkDiagonalBingo = (hitIndex, hits) => {
   const rightDiagonal = [4, 8, 16, 20];
   const bingo = [];
 
-  if (leftDiagonal.indexOf(hitIndex) !== -1) {
+  if (leftDiagonal.includes(hitIndex)) {
     for (let i = 0; i < 5; i++) {
       const index = convertToTile(i, i);
-      if (hits.indexOf(index) !== -1) bingo.push(index);
+      if (hits.includes(index)) bingo.push(index);
       else break;
     }
-    if (bingo.length === 5) return { result: true, bingo };
-  } else if (rightDiagonal.indexOf(hitIndex) !== -1) {
+    if (bingo.length === 5) return bingo;
+  } else if (rightDiagonal.includes(hitIndex)) {
     let y = 0; // We start from the bottom left corner of the board
     for (let i = 4; i >= 0; i--) {
       const index = convertToTile(i, y);
       y += 1; // increases as i decreases
-      if (hits.indexOf(index) !== -1) bingo.push(index);
+      if (hits.includes(index)) bingo.push(index);
       else break;
     }
-    if (bingo.length === 5) return { result: true, bingo };
+    if (bingo.length === 5) return bingo;
   }
-  return { result: false };
+  return false;
 };
 
 export { checkDiagonalBingo, checkHorizontalBingo, checkVerticalBingo };

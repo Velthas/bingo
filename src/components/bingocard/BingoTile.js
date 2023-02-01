@@ -29,13 +29,13 @@ const Tile = styled.div`
   position: relative;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
   cursor: pointer;
   transition: 0.3s ease-out;
   aspect-ratio: 1/1; 
+  text-align: center; 
 
   margin: -1px 0 0 -1px;
   padding: 8px;
