@@ -21,8 +21,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1b1d1ec7;
-  color: white;
+  background-color: ${props => props.theme.backdrop};
+  color: ${props => props.theme.light};
 `;
 
 const Heading = styled.h1`

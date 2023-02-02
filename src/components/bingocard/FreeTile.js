@@ -25,8 +25,8 @@ const Tile = styled.div`
   padding: 8px;
   border: 1px solid black;
   font-size: 1rem;
-  color: #fff;
-  background-color: ${({ allFound }) => allFound ? 'crimson' : "#06354e"};
+  color: ${props => props.theme.light};
+  background-color: ${(props) => props.allFound ? props.theme.allHit : props.theme.main};
   text-align: center;
   width: 100%;
   aspect-ratio: 1/1;
@@ -42,7 +42,7 @@ const Content = styled.span`
 `;
 
 const Icon = `
-  color: #fff;
+  color: ${props => props.theme.light};
   height: 60px;
   width: 60px;
   transition: 0.15s ease-out;
@@ -64,7 +64,7 @@ const Icon = `
   @media (max-width: 400px) {
     height: 28px;
     width: 28px;
-  } ;
+  }
 `;
 
 const Tea = styled(MdEmojiFoodBeverage)`

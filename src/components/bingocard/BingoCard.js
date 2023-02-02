@@ -116,14 +116,14 @@ const Button = styled.button`
   width: 150px;
 
   transition: 0.15s ease-out;
-  box-shadow: 0px 5px #3d7c9e;
+  box-shadow: 0px 5px ${props => props.theme.resetShadow};
   font-size: 1.3rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
-  background-color: #06354e;
-  color: #fff;
+  background-color: ${props => props.theme.main};
+  color: ${props => props.theme.light};
 
   &:active {
     box-shadow: none;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import "./style/shared.css";
 import BingoCard from "./components/bingocard/BingoCard";
 import BingoNotification from "./components/BingoNotification";
+import { ThemeProvider } from "styled-components";
+import appTheme from "./style/theme";
 
 function App() {
   const [cheer, setCheer] = useState(false); // Used to temporarily display 'cheer' notification
@@ -14,16 +16,18 @@ function App() {
   };
 
   return (
-    <Wrapper className="App">
-      {cheer && <BingoNotification />}
-      <Heading>Conference Call Bingo</Heading>
-      <Intro>
-        Welcome to Conference Call Bingo, an app to keep by your side as you
-        rush head down into another work call. Line up 5 of these bizarre
-        occurrences to get a Bingo!
-      </Intro>
-      <BingoCard playCheer={playCheer} />
-    </Wrapper>
+    <ThemeProvider theme={appTheme}>
+      <Wrapper className="App">
+        {cheer && <BingoNotification />}
+        <Heading>Conference Call Bingo</Heading>
+        <Intro>
+          Welcome to Conference Call Bingo, an app to keep by your side as you
+          rush head down into another work call. Line up 5 of these bizarre
+          occurrences to get a Bingo!
+        </Intro>
+        <BingoCard playCheer={playCheer} />
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 

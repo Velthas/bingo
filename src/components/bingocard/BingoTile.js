@@ -40,11 +40,11 @@ const Tile = styled.div`
   margin: -1px 0 0 -1px;
   padding: 8px;
   border: 1px solid black;
-  background-color: ${({ isHit }) => (isHit ? "#aad6ed" : "transparent")};
-  ${({ bingo }) => (bingo ? "background-color: #c5e0a6" : '')};
+  background-color: ${(props) => (props.isHit ? props.theme.hit : "transparent")};
+  ${(props) => (props.bingo ? `background-color: ${props.theme.bingo}` : '')};
 
   &::after {
-    color: black;
+    color: ${props => props.theme.dark};
     content: "${({ index }) => index}";
     position: absolute;
     top: 5px;
@@ -53,8 +53,8 @@ const Tile = styled.div`
   }
 
   &:hover {
-    background-color: ${({ isHit }) => (isHit ? "#76abc7" : "#dfdfdf")};
-    ${({ bingo }) => (bingo ? "background-color: #a9c688" : '')};
+    background-color: ${(props) => (props.isHit ? props.theme.hitOver : props.theme.defaultHover)};
+    ${(props) => (props.bingo ? `background-color: ${props.theme.bingoHover}` : '')};
   }
 
   @media (max-width: 650px) {
